@@ -1,29 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import Dashboard from './components/Dashboard.jsx';
-import Reports from './components/Reports.jsx';
-import History from './components/History.jsx';
-import Settings from './components/Setting.jsx';
-import Navbar from './components/Navbar.jsx';
+// import Reports from './components/Reports.jsx';
+// import History from './components/History.jsx';
+
 
 const App = () => {
-  const [user, setUser] = useState(localStorage.getItem('username'));
-
-  if (!user) return <Login onLogin={setUser} />;
+  const [user, setUser] = useState(localStorage.getItem('user'));
+ 
+ useEffect(()=>{
+    const user =  JSON.parse(localStorage.getItem("user"));
+    if(user){
+      setUser(user)
+    }
+  }, [])
+  
+  // if (!user) return <Login onLogin={setUser} />
+  // user ? (<Login type='login' onLogin={setUser}/>) : (<Login type='signup' onLogin={setUser}/>);
 
   return (
-    <div className="flex h-screen">
-      <Navbar setUser={setUser} />
-      <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/settings" element={<Settings user={user} />} />
+  <>
+   
+        
+      {/* {user ? (<Login type='login' onLogin={setUser}/>) : (<Login type='signup' onLogin={setUser}/>)} */}
+      {/* <Navbar setUser={setUser} /> */}
+       <div className='h-full bg-gray-50'>
+         <Routes >
+           {user ? (<Route path='/' element={<Login type="login"/>} />) : (<Route path='/' element={<Login type="signup"/>} />)}
+          <Route path="/dashboard" element={<Dashboard />} />
+          {/* <Route path="/reports" element={<Reports />} />
+          <Route path="/history" element={<History />} /> */}
         </Routes>
-      </div>
-    </div>
+       </div>
+      </>
+   
   );
 };
 

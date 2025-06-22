@@ -74,13 +74,13 @@ const Reports = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-bold mb-4 text-center">Expenses Statistics</h2>
+      <h2 className="text-2xl font-bold mb-2 text-center">Expenses Statistics</h2>
 
       {data.length === 0 ? (
         <p className="text-center">No data</p>
       ) : (
-        <div className="h-full rounded-lg flex items-center justify-center">
-          <ResponsiveContainer width="100%" height={250}>
+        <div className="h-full rounded-lg flex items-center p-4 justify-center">
+          <ResponsiveContainer width="100%" height={230}>
             <PieChart>
               <Pie data={data} dataKey="value" outerRadius={100} label>
                 {data.map((_, i) => (

@@ -80,15 +80,20 @@ const Reports = () => {
         <p className="text-center">No data</p>
       ) : (
         <div className="h-full rounded-lg flex items-center p-4 justify-center">
-          <ResponsiveContainer width="100%" height={230}>
+          <ResponsiveContainer width="100%" height={300}>
             <PieChart>
-              <Pie data={data} dataKey="value" outerRadius={100} label>
+              <Pie
+                data={data}
+                dataKey="value"
+                outerRadius={100}
+                label={false} 
+              >
                 {data.map((_, i) => (
                   <Cell key={i} fill={COLORS[i % COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip />
-              <Legend />
+              <Tooltip /> 
+              <Legend />  
             </PieChart>
           </ResponsiveContainer>
         </div>
